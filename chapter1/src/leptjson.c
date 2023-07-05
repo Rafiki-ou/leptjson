@@ -78,8 +78,10 @@ int lept_parse(lept_value* v, const char* json) {
         // ws value ws 这个格式 前面ws value 已经解析完成，继续解析后面，看是否还有其他字符
         lept_parse_whitespace(&c);
         // 说明有其他字符-->不合法
-        if(*c.json != '\0')
-            ret = LEPT_PARSE_ROOT_NOT_SINGULAR;
+        if (*c.json != '\0') {
+			v->type = LEPT_NULL;
+			ret = LEPT_PARSE_ROOT_NOT_SINGULAR;
+		}
     }
     return ret;
 }
